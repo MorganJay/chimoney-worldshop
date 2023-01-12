@@ -1,17 +1,21 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
-const ProductImage = () => {
+interface ProductImageProps {
+  imgUrl: string;
+  name: string;
+  link: string;
+}
+
+const ProductImage = ({ imgUrl, name, link }: ProductImageProps) => {
   return (
     <ImageContainer>
       <span>
-        <a href="">
+        <Link to={link}>
           <div>
-            <img
-              src="https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/81MSnS4nUnL._AC_UL320_.jpg"
-              alt="Carhartt Men's Knit Cuffed Beanie"
-            />
+            <img src={imgUrl} alt={name} />
           </div>
-        </a>
+        </Link>
       </span>
     </ImageContainer>
   );
@@ -46,7 +50,7 @@ export const ImageContainer = styled.div`
 
     div {
       margin-bottom: 0;
-      padding-top: 100%;
+      padding-top: 95%;
       position: relative;
 
       img {

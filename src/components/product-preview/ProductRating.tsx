@@ -1,17 +1,23 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
-const ProductRating = () => {
+interface ProductRatingProps {
+  link: string;
+  ratings: number;
+}
+
+const ProductRating = ({ link, ratings }: ProductRatingProps) => {
   return (
     <StarsnRatingContainer>
       <span aria-label="4.8 out of 5 stars">
-        <a href="">
+        <Link to={link}>
           <i className="star"></i>
           <i className="popover"></i>
-        </a>
-        <span>4.8 </span>
+        </Link>
+        <span>{(Math.random() * 5).toFixed(1)} </span>
       </span>
       <span aria-label="135,519">
-        <a href="">(135,519)</a>
+        <Link to="">({ratings.toLocaleString()})</Link>
       </span>
     </StarsnRatingContainer>
   );
@@ -35,7 +41,7 @@ export const StarsnRatingContainer = styled.div`
 
   .star {
     background-image: url(https://m.media-amazon.com/images/S/sash/ZNt8quAxIfEMMky.png);
-    background-position: -2px -2px;
+    background-position: -2px -3px;
     background-size: 512px 512px;
     vertical-align: bottom;
     height: 18px;

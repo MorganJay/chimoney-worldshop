@@ -1,4 +1,15 @@
-export interface Assets {
+export enum LoadingState {
+  IDLE,
+  LOADING,
+  FAILED,
+}
+
+export type AssetsResponse = {
+  status: string;
+  data: Assets;
+};
+
+export type Assets = {
   benefitsList: BenefitsList[];
   supportedCountriesAirtime: string[];
   momoRedeemOptions: MomoRedeemOption[];
@@ -12,7 +23,7 @@ export interface Assets {
   subscriptionPlans: SubscriptionPlan[];
   giftCardsWG: GiftCardsWG;
   ecommerce: Ecommerce[];
-}
+};
 
 export interface AcceptedTokens {
   xrpl: string[];

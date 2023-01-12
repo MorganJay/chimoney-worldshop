@@ -1,48 +1,66 @@
+import { useEffect } from 'react';
+import CircularProgress from '@mui/material/CircularProgress';
+
 import ProductPreview from '../../components/product-preview/ProductPreview';
+
+import { LoadingState } from '../../types/assets';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import {
+  fetchAssetsAsync,
+  selectProductState,
+} from '../../features/products/productSlice';
 
 import {
   Container,
   ProductTitle,
   ProductsGrid,
-  Title,
-  SubTitle,
+  ListContainer,
   CountContainer,
   CountSubContainer,
   TextWrapper,
-  TitleContainer,
 } from './styles';
 
 const ProductListPage = () => {
+  const dispatch = useAppDispatch();
+  const { status, value } = useAppSelector(selectProductState);
+
+  useEffect(() => {
+    dispatch(fetchAssetsAsync());
+  }, []);
+
   return (
     <Container>
-      <TitleContainer>
-        <Title>Gift Cards</Title>
-        <Title>Welcome, Alice!</Title>
-      </TitleContainer>
-      <SubTitle>Shop gift cards</SubTitle>
-      <CountContainer>
-        <CountSubContainer>
-          <TextWrapper>
-            <span>1 - 12 of over 80,000 results for</span>{' '}
-            <ProductTitle>Gift Cards</ProductTitle>
-          </TextWrapper>
-        </CountSubContainer>
-      </CountContainer>
-
-      <ProductsGrid>
-        <ProductPreview />
-        <ProductPreview />
-        <ProductPreview />
-        <ProductPreview />
-        <ProductPreview />
-        <ProductPreview />
-        <ProductPreview />
-        <ProductPreview />
-        <ProductPreview />
-        <ProductPreview />
-        <ProductPreview />
-        <ProductPreview />
-      </ProductsGrid>
+      <ListContainer>
+        {status !== LoadingState.IDLE ? (
+          <CircularProgress
+            size={50}
+            sx={{
+              position: 'absolute',
+              top: 200,
+              left: 0,
+              color: '#c45500',
+              right: 0,
+              margin: 'auto',
+            }}
+          />
+        ) : (
+          <>
+            <CountContainer>
+              <CountSubContainer>
+                <TextWrapper>
+                  1 - 12 of over 100 results for
+                  <ProductTitle> Gift Cards</ProductTitle>
+                </TextWrapper>
+              </CountSubContainer>
+            </CountContainer>
+            <ProductsGrid>
+              {value?.content.slice(0, 12).map((giftCard) => (
+                <ProductPreview key={giftCard.productId} product={giftCard} />
+              ))}
+            </ProductsGrid>
+          </>
+        )}
+      </ListContainer>
     </Container>
   );
 };

@@ -1,26 +1,14 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  width: 100%;
   min-height: 1px;
   overflow: visible;
-  width: 95%;
+  width: 100%;
   margin: 2rem auto;
 `;
 
-export const TitleContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-`;
-
-export const Title = styled.h1`
-  font-size: 2rem;
-  line-height: 2.571rem;
-`;
-
-export const SubTitle = styled.p`
-  margin-bottom: 1rem;
+export const ListContainer = styled.div`
+  position: relative;
 `;
 
 export const CountContainer = styled.div`

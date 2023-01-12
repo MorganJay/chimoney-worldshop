@@ -1,14 +1,18 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
-const ProductPrice = () => {
+interface ProductPriceProps {
+  price: number;
+  link: string;
+}
+
+const ProductPrice = ({ price, link }: ProductPriceProps) => {
   return (
     <PriceContainer>
-      <PriceSubContainer href="/" role="button">
-        <span className="symbol">$</span>19
-        <span className="fraction">89</span>
-        <span className="dash">-</span>
-        <span className="symbol">$</span>46
-        <span className="fraction">92</span>
+      <PriceSubContainer to={link} role="button">
+        <span className="symbol">$</span>
+        {price.toLocaleString()}
+        <span className="fraction">00</span>
       </PriceSubContainer>
     </PriceContainer>
   );
@@ -21,7 +25,7 @@ export const PriceContainer = styled.div`
   width: 100%;
 `;
 
-export const PriceSubContainer = styled.a`
+export const PriceSubContainer = styled(Link)`
   display: block;
   user-select: none;
   font-size: 28px;
