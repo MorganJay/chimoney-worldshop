@@ -1,10 +1,13 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const NavBar = () => {
   return (
     <StyledNav>
       <TitleContainer>
-        <Title>Gift Cards</Title>
+        <Title>
+          <Link to="/">Gift Cards</Link>
+        </Title>
         <Title>Welcome, Alice!</Title>
       </TitleContainer>
       <SubTitle>Shop the perfect gift card</SubTitle>

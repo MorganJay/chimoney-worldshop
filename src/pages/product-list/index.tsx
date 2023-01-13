@@ -24,8 +24,10 @@ const ProductListPage = () => {
   const dispatch = useAppDispatch();
   const { status, value } = useAppSelector(selectProductState);
 
+  // TODO: Add state and button for viewing all products
+
   useEffect(() => {
-    dispatch(fetchAssetsAsync());
+    if (!value) dispatch(fetchAssetsAsync());
   }, []);
 
   return (

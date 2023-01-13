@@ -1,24 +1,39 @@
-import styled from 'styled-components';
+import styled, { css, ThemedStyledFunctionBase } from 'styled-components';
 import { Link } from 'react-router-dom';
 
-interface ProductRatingProps {
-  link: string;
+import { ProductCardProps } from '../../types/productCard';
+
+interface ProductRatingProps extends ProductCardProps {
   ratings: number;
+  detailed?: boolean;
 }
 
-const ProductRating = ({ link, ratings }: ProductRatingProps) => {
+interface RatingsCountProps extends ThemedStyledFunctionBase<'span', object> {
+  detailed?: boolean;
+}
+
+const ProductRating = ({
+  link,
+  ratings,
+  handleClick,
+  detailed,
+}: ProductRatingProps) => {
   return (
     <StarsnRatingContainer>
       <span aria-label="4.8 out of 5 stars">
-        <Link to={link}>
+        <Link to={link} onClick={handleClick}>
           <i className="star"></i>
           <i className="popover"></i>
         </Link>
-        <span>{(Math.random() * 5).toFixed(1)} </span>
+        {!detailed && <span>{(Math.random() * 5).toFixed(1)} </span>}
       </span>
-      <span aria-label="135,519">
-        <Link to="">({ratings.toLocaleString()})</Link>
-      </span>
+      <RatingsCount detailed={detailed} aria-label={ratings.toLocaleString()}>
+        <Link to={link}>
+          {detailed
+            ? `${ratings.toLocaleString()} customer rating(s)`
+            : `(${ratings.toLocaleString()})`}
+        </Link>
+      </RatingsCount>
     </StarsnRatingContainer>
   );
 };
@@ -59,4 +74,17 @@ export const StarsnRatingContainer = styled.div`
     background-size: 400px 900px;
     opacity: 0.6;
   }
+`;
+
+const smallSizeCss = css`
+  font-size: 12px;
+  line-height: 16px;
+`;
+
+const setSmallFontSize = (props: RatingsCountProps) => {
+  return props.detailed ? smallSizeCss : null;
+};
+
+export const RatingsCount = styled.span<RatingsCountProps>`
+  ${setSmallFontSize}
 `;

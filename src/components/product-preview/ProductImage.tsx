@@ -1,17 +1,23 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-interface ProductImageProps {
+import { ProductCardProps } from '../../types/productCard';
+
+interface ProductImageProps extends ProductCardProps {
   imgUrl: string;
   name: string;
-  link: string;
 }
 
-const ProductImage = ({ imgUrl, name, link }: ProductImageProps) => {
+const ProductImage = ({
+  imgUrl,
+  name,
+  link,
+  handleClick,
+}: ProductImageProps) => {
   return (
-    <ImageContainer>
+    <ImageContainer onClick={handleClick}>
       <span>
-        <Link to={link}>
+        <Link to={link} onClick={handleClick}>
           <div>
             <img src={imgUrl} alt={name} />
           </div>
@@ -25,7 +31,7 @@ export default ProductImage;
 
 export const ImageContainer = styled.div`
   margin-bottom: 8px;
-  padding: 0 8px;
+  padding: 0 2px;
   overflow: hidden;
   text-align: center;
   position: relative;
@@ -60,7 +66,7 @@ export const ImageContainer = styled.div`
         bottom: 0;
         left: 0;
         right: 0;
-        max-width: 100%;
+        width: 100%;
         max-height: 100%;
         vertical-align: top;
         border: 0;

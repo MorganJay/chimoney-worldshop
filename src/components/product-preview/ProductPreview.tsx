@@ -3,19 +3,19 @@ import styled from 'styled-components';
 
 import Badge from './Badge';
 import Image from './ProductImage';
+import Price from './ProductPrice';
 import Rating from './ProductRating';
 import PopupToggle from './MenuPopup';
-import Price from './ProductPrice';
 
-import { GiftCard } from '../../types/assets';
-
-interface ProductPreviewProps {
-  product: GiftCard;
-}
+import { useAppDispatch } from '../../app/hooks';
+import { selectProduct } from '../../features/products/productSlice';
+import { ProductPreviewProps } from '../../types/productCard';
 
 const ProductPreview = ({ product }: ProductPreviewProps) => {
-  const { name, img, productId, brand } = product;
-  const link = `/products/${name}`;
+  const dispatch = useAppDispatch();
+  const { name, img, productId, brand, fixedSenderDenominations } = product;
+  const link = `/products/${productId}`;
+  const price = fixedSenderDenominations?.at(0) ?? 0;
 
   return (
     <Container>
@@ -23,14 +23,27 @@ const ProductPreview = ({ product }: ProductPreviewProps) => {
         <CardWrapper>
           <PopupToggle />
           <Badge />
-          <Image imgUrl={img} link={link} name={name} />
+          <Image
+            imgUrl={img}
+            link={link}
+            name={name}
+            handleClick={() => dispatch(selectProduct(product))}
+          />
           <DetailsContainer>
-            <Link to={link}>
+            <Link to={link} onClick={() => dispatch(selectProduct(product))}>
               {/* Color picker? */}
               <ProductName>{name}</ProductName>
             </Link>
-            <Rating link={link} ratings={brand.brandId} />
-            <Price price={productId} link={link} />
+            <Rating
+              link={link}
+              ratings={brand.brandId}
+              handleClick={() => dispatch(selectProduct(product))}
+            />
+            <Price
+              product={product}
+              link={link}
+              handleClick={() => dispatch(selectProduct(product))}
+            />
           </DetailsContainer>
         </CardWrapper>
       </SubContainer>

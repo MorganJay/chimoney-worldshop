@@ -1,19 +1,22 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { RootState } from '../../app/store';
 
 import { getAssetsAsync } from '../../services/AssetsService';
 
-import { GiftCardsRLD, LoadingState } from '../../types/assets';
+import { GiftCard, GiftCardsRLD, LoadingState } from '../../types/assets';
+import { getProductById } from '../../utils/productFunctions';
 
 export interface ProductsState {
   value: GiftCardsRLD | undefined;
   status: LoadingState;
+  selectedProduct: GiftCard | undefined;
 }
 
 const initialState: ProductsState = {
   value: undefined,
   status: LoadingState.IDLE,
+  selectedProduct: undefined,
 };
 
 export const fetchAssetsAsync = createAsyncThunk(
@@ -29,7 +32,20 @@ export const fetchAssetsAsync = createAsyncThunk(
 export const productSlice = createSlice({
   initialState,
   name: 'products',
-  reducers: {},
+  reducers: {
+    selectProduct: (state, action: PayloadAction<GiftCard>) => {
+      state.selectedProduct = action.payload;
+    },
+    clearSelectedProduct: (state) => {
+      state.selectedProduct = undefined;
+    },
+    filterAndSetSelectedProduct: (state, action: PayloadAction<number>) => {
+      state.selectedProduct = getProductById(
+        state.value!.content,
+        action.payload
+      );
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchAssetsAsync.pending, (state) => {
@@ -44,6 +60,12 @@ export const productSlice = createSlice({
       });
   },
 });
+
+export const {
+  selectProduct,
+  clearSelectedProduct,
+  filterAndSetSelectedProduct,
+} = productSlice.actions;
 
 export const selectProductState = (state: RootState) => state.products;
 
