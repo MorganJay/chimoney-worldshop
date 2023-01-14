@@ -3,6 +3,7 @@ import { Toaster } from 'react-hot-toast';
 import { Routes, Route } from 'react-router-dom';
 
 import NavBar from './components/navbar/Navbar';
+import CartPage from './pages/cart';
 import ProductDetailPage from './pages/product-detail';
 import ProductListPage from './pages/product-list';
 
@@ -14,6 +15,7 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/" element={<ProductListPage />} />
         <Route path="/products/:id" element={<ProductDetailPage />} />
+        <Route path="/cart" element={<CartPage />} />
         {/* {/* <Route path="/checkout" element={<CheckoutPage />} /> */}
       </Routes>
     </main>

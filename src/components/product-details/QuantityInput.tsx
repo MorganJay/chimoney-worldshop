@@ -12,7 +12,9 @@ const QuantityInput = ({ quantity, onQuantityChange }: QuantityInputProps) => {
       <label htmlFor="quantity-input">Quantity</label>
       <InputAmountContainer>
         <input
-          type="text"
+          type="number"
+          min={1}
+          max={100}
           name="quantity"
           id="quantity-input"
           value={quantity}

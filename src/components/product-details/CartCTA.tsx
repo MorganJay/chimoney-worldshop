@@ -1,23 +1,44 @@
 import styled from 'styled-components';
-import { CurrencyEnum } from '../../types/assets';
-import { breakpointMd } from '../../variables.styles';
+import { toast } from 'react-hot-toast';
 
 import Button from '../button/Button';
 
+import { useAppDispatch } from '../../app/hooks';
+import { CurrencyEnum } from '../../types/assets';
+import { breakpointMd } from '../../variables.styles';
+
+import { addItem } from '../../features/cart/cartSlice';
+import { CartItem } from '../../types/cart';
+
 interface Props {
   quantity: number;
+  productId: string;
   currency: CurrencyEnum;
-  totalPrice: number;
+  totalPrice: string;
 }
 
-const CartCTA = ({ quantity, currency, totalPrice }: Props) => {
+const CartCTA = ({ productId, quantity, currency, totalPrice }: Props) => {
+  const dispatch = useAppDispatch();
+
+  const handleAddItem = () => {
+    const cartItem: CartItem = {
+      id: productId,
+      quantity,
+    };
+    dispatch(addItem(cartItem));
+    toast.success(`${quantity} item(s) added to your cart`);
+  };
+
   return (
     <CartContainer>
       <CartInfoDisplay>
-        Qty: {currency}{quantity} <br />
-        <PriceTag>{totalPrice}</PriceTag>
+        Qty: {quantity} item(s) <br />
+        <PriceTag>
+          {currency}
+          {totalPrice}
+        </PriceTag>
       </CartInfoDisplay>
-      <Button name="Add to cart" primary>
+      <Button name="Add to cart" onClick={handleAddItem} primary>
         Add to cart
       </Button>
       <OrDivider>

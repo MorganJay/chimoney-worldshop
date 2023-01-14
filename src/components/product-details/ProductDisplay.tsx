@@ -8,15 +8,19 @@ import { ProductPreviewProps } from '../../types/productCard';
 
 interface Props extends ProductPreviewProps, QuantityInputProps {}
 
-const ProductDisplay = ({
-  quantity,
-  onQuantityChange,
-  product,
-}: Props) => {
+const ProductDisplay = ({ quantity, onQuantityChange, product }: Props) => {
   if (!product) return null;
 
-  const { name, position, category, categoryUrl, productId, marketplace } =
-    product;
+  const {
+    currency,
+    price,
+    name,
+    position,
+    category,
+    url,
+    productId,
+    marketplace,
+  } = product;
 
   return (
     <ProductDetailsContainer>
@@ -29,8 +33,14 @@ const ProductDisplay = ({
       />
       <Divider />
       <ProductDescription>
+        <h2>
+          {currency}
+          {price}
+        </h2>
         <p>{category}</p>
-        <p>{categoryUrl}</p>
+        <a href={url} target="_blank">
+          <p>view product on {marketplace}</p>
+        </a>
       </ProductDescription>
       <Divider />
       {/* <h2>Enter your gift card details</h2>
@@ -92,11 +102,19 @@ const Divider = styled.hr`
 
 const ProductDescription = styled.div`
   max-width: 100%;
+  h2 {
+    margin-bottom: 20px;
+  }
+  a {
+    color: #007185;
+  }
+
   p {
     overflow: hidden;
     margin-bottom: 22px;
     max-height: 200px;
     text-overflow: ellipsis;
+    text-transform: capitalize;
 
     &:first-child {
       font-size: 1.3rem;

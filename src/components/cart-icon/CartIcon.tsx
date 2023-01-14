@@ -1,12 +1,17 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
+import { useAppSelector } from '../../app/hooks';
+import { selectCartItemsCount } from '../../features/cart/cartSlice';
+
 const CartIcon = () => {
+  const count = useAppSelector(selectCartItemsCount);
+
   return (
-    <StyledLink to="/cart" aria-label={`${0} items in cart`} id="nav-cart">
+    <StyledLink to="/cart" aria-label={`${count} items in cart`} id="nav-cart">
       <CartCountContainer id="nav-cart-count-container">
         <CartCount id="nav-cart-count" aria-hidden="true">
-          {0}
+          {count}
         </CartCount>
         <CartIconSprite className="nav-cart-icon nav-sprite" />
       </CartCountContainer>

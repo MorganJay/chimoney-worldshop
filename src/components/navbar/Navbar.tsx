@@ -2,20 +2,21 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 import CartIcon from '../cart-icon/CartIcon';
+import { primaryColor, breakpointMd } from '../../variables.styles';
 
 const NavBar = () => {
   return (
     <StyledNav>
       <TitleContainer>
-        <Title>
-          <Link to="/">Gift Cards</Link>
-        </Title>
+        <Link to="/">
+          <Title>Wordshop Products</Title>
+        </Link>
         <NavCartWrapper>
-          <Title>Welcome, Alice!</Title>
+          <h1>Welcome, Alice!</h1>
           <CartIcon />
         </NavCartWrapper>
       </TitleContainer>
-      <SubTitle>Shop the perfect gift card</SubTitle>
+      <SubTitle>Get your best deal today</SubTitle>
     </StyledNav>
   );
 };
@@ -23,7 +24,6 @@ const NavBar = () => {
 export default NavBar;
 
 export const StyledNav = styled.nav`
-  color: white;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -41,16 +41,29 @@ export const TitleContainer = styled.div`
 export const Title = styled.h1`
   font-size: 2rem;
   line-height: 2.571rem;
+  color: ${primaryColor};
 `;
 
 const NavCartWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  h1 {
+    color: white;
+    font-size: 1.8rem;
+    line-height: 2.571rem;
+    display: none;
+
+    @media (min-width: ${breakpointMd}px) {
+      display: block;
+    }
+  }
 `;
 
 export const SubTitle = styled.h4`
   padding: 0.5rem;
+  color: white;
   background-color: #232f3e;
   margin: 0 0 1rem;
   width: 100%;

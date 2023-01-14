@@ -5,6 +5,7 @@ interface CustomButtonProps {
   children: string | React.ReactNode;
   secondary?: boolean;
   name: string;
+  onClick?: () => void;
   type?: 'button' | 'submit' | 'reset' | undefined;
 }
 

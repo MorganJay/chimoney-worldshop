@@ -24,7 +24,7 @@ const ProductDetailPage = () => {
   const [inputtedAmount, setInputtedAmount] = useState('');
   const [quantity, setQuantity] = useState<number>(1);
 
-  const totalPrice = quantity * selectedAmount;
+  const totalPrice = (quantity * selectedAmount).toFixed(2);
 
   const handleQuantityInputChange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -85,6 +85,7 @@ const ProductDetailPage = () => {
             onQuantityChange={handleQuantityInputChange}
           />
           <CartCTA
+            productId={selectedProduct.productId}
             currency={selectedProduct!.currency!}
             quantity={quantity}
             totalPrice={totalPrice}
