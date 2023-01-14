@@ -31,20 +31,26 @@ $ git clone https://github.com/MorganJay/chimoney-worldshop
 $ cd chimoney-worldshop
 ```
 
+Then you can install the dependencies either using NPM or Yarn:
+
+Using NPM:
+
+```bash
+# Install dependencies
+$ npm install
+
+# Start development server
+$ npm start
 ```
-yarn install
-yarn dev
+
+Using Yarn:
+
+```bash
+# Install dependencies
+$ yarn
+
+# Start development server
+$ yarn start
 ```
 
-or npm
-
-```
-npm install
-npm run dev
-```
-
-
-
-# License
-
-MIT
+Once your server has started, go to this url `http://localhost:3000/` and you will see the website running on a Development Server, and you can have a look around 🙂
