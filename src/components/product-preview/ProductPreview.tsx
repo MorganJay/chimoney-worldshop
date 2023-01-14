@@ -13,9 +13,8 @@ import { ProductPreviewProps } from '../../types/productCard';
 
 const ProductPreview = ({ product }: ProductPreviewProps) => {
   const dispatch = useAppDispatch();
-  const { name, img, productId, brand, fixedSenderDenominations } = product;
+  const { name, thumbnail, productId, marketplace, position } = product;
   const link = `/products/${productId}`;
-  const price = fixedSenderDenominations?.at(0) ?? 0;
 
   return (
     <Container>
@@ -24,7 +23,7 @@ const ProductPreview = ({ product }: ProductPreviewProps) => {
           <PopupToggle />
           <Badge />
           <Image
-            imgUrl={img}
+            imgUrl={thumbnail}
             link={link}
             name={name}
             handleClick={() => dispatch(selectProduct(product))}
@@ -36,7 +35,7 @@ const ProductPreview = ({ product }: ProductPreviewProps) => {
             </Link>
             <Rating
               link={link}
-              ratings={brand.brandId}
+              ratings={position}
               handleClick={() => dispatch(selectProduct(product))}
             />
             <Price
@@ -54,7 +53,7 @@ const ProductPreview = ({ product }: ProductPreviewProps) => {
 export default ProductPreview;
 
 export const Container = styled.div`
-  width: 320px;
+  width: 300px;
   padding: 2px 6px 6px;
   margin-bottom: -2px;
   border-bottom: 2px solid #ddd;
@@ -73,6 +72,7 @@ export const SubContainer = styled.div`
   overflow: hidden;
   height: 100%;
   position: relative;
+  min-height: 500px;
 `;
 
 export const CardWrapper = styled.div`

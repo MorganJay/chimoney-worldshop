@@ -16,7 +16,6 @@ const GlobalStyle = createGlobalStyle`
    }
    
  body {
-  /* min-height: 100vh; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #0F1111;
@@ -48,11 +47,6 @@ const GlobalStyle = createGlobalStyle`
 
   button {
     cursor: pointer;
-  }
-
-  .App {
-    width: 95%;
-    margin: 0 auto;
   }
 
 `;

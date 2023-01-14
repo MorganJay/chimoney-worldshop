@@ -2,32 +2,26 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 import { ProductCardProps, ProductPreviewProps } from '../../types/productCard';
-import { DenominationType } from '../../types/assets';
 
 interface Props extends ProductCardProps, ProductPreviewProps {}
 
 const ProductPrice = ({ product, link, handleClick }: Props) => {
-  const {
-    denominationType,
-    minSenderDenomination,
-    maxSenderDenomination,
-    fixedSenderDenominations,
-  } = product;
-  const fixedPrice = fixedSenderDenominations?.at(0) ?? 0;
+  const { price, currency } = product;
+  // const fixedPrice = fixedSenderDenominations?.at(0) ?? 0;
   return (
     <PriceContainer>
       <PriceSubContainer to={link} role="button" onClick={handleClick}>
-        <span className="symbol">$</span>
-        {minSenderDenomination?.toLocaleString() ?? fixedPrice}
-        <span className="fraction">00</span>
-        {denominationType === DenominationType.Range && (
+        <span className="symbol">{currency}</span>
+        {price?.toString().split('.')[0] ?? 0}
+        <span className="fraction">{price?.toString().split('.')[1] ?? 0}</span>
+        {/* {denominationType === DenominationType.Range && (
           <>
             <span className="dash">-</span>
             <span className="symbol">$</span>
             {maxSenderDenomination?.toLocaleString() ?? fixedPrice}
             <span className="fraction">00</span>
           </>
-        )}
+        )} */}
       </PriceSubContainer>
     </PriceContainer>
   );

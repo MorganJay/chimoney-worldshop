@@ -24,13 +24,13 @@ const AmountPicker = ({
       <label htmlFor="">Amount</label>
       <AmountList>
         {denominations?.map((amount, idx) => (
-          <li
+          <AmountListItem
             key={idx}
             className={selectedAmount === amount ? 'active' : ''}
             onClick={() => onAmountListClick(amount)}
           >
             ${amount}
-          </li>
+          </AmountListItem>
         ))}
         <InputAmountContainer fullWidth>
           <OutlinedInput
@@ -69,7 +69,9 @@ const AmountList = styled.ul`
   height: 100%;
   flex-wrap: wrap;
   gap: 6px;
+`;
 
+const AmountListItem = styled.li`
   li {
     display: inline-block;
     border-color: #adb1b8 #a2a6ac #8d9096;

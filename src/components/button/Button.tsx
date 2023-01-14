@@ -1,14 +1,19 @@
-import styled, { css, ThemedStyledFunctionBase } from 'styled-components';
+import styled, { css } from 'styled-components';
 
 interface CustomButtonProps {
   primary?: boolean;
   children: string | React.ReactNode;
   secondary?: boolean;
   name: string;
+  type?: 'button' | 'submit' | 'reset' | undefined;
 }
 
-const Button = ({ children, ...props }: CustomButtonProps) => {
-  return <StyledButton {...props}>{children}</StyledButton>;
+const Button = ({ type, children, ...props }: CustomButtonProps) => {
+  return (
+    <StyledButton type={type || 'button'} {...props}>
+      {children}
+    </StyledButton>
+  );
 };
 
 export default Button;
@@ -21,6 +26,10 @@ const primaryStyles = css`
     background: #f7ca00;
     border-color: #f2c200;
   }
+
+  &:active {
+    background: #f0b800;
+  }
 `;
 
 const secondaryStyles = css`
@@ -31,6 +40,10 @@ const secondaryStyles = css`
   &:hover {
     background: #fa8900;
   }
+
+  &:active {
+    background: #ffa41c;
+  }
 `;
 
 const StyledButton = styled.button<CustomButtonProps>`
@@ -38,7 +51,6 @@ const StyledButton = styled.button<CustomButtonProps>`
   border-radius: 20px;
   box-shadow: 0 2px 5px 0 rgb(213 217 217 / 50%);
   width: 100%;
-  /* height: 100%; */
   cursor: pointer;
   transition: all 0.1s linear;
   line-height: 19px;
@@ -55,6 +67,10 @@ const StyledButton = styled.button<CustomButtonProps>`
   border-width: 1px;
   padding: 0;
   text-decoration: none;
+  &:active {
+    border-color: #008296;
+    box-shadow: 0 0 0 3px #c8f3fa, inset 0 0 0 2px #fff;
+  }
   ${(props) =>
     props.primary ? primaryStyles : props.secondary ? secondaryStyles : null}
 `;

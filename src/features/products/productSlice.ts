@@ -4,18 +4,18 @@ import { RootState } from '../../app/store';
 
 import { getAssetsAsync } from '../../services/AssetsService';
 
-import { GiftCard, GiftCardsRLD, LoadingState } from '../../types/assets';
-import { getProductById } from '../../utils/productFunctions';
+import { Ecommerce, LoadingState } from '../../types/assets';
+import { getProductById } from './productFunctions';
 
 export interface ProductsState {
-  value: GiftCardsRLD | undefined;
+  value: Ecommerce[] | undefined;
   status: LoadingState;
-  selectedProduct: GiftCard | undefined;
+  selectedProduct: Ecommerce | undefined;
 }
 
 const initialState: ProductsState = {
   value: undefined,
-  status: LoadingState.IDLE,
+  status: LoadingState.LOADING,
   selectedProduct: undefined,
 };
 
@@ -25,7 +25,8 @@ export const fetchAssetsAsync = createAsyncThunk(
     const {
       data: { data },
     } = await getAssetsAsync();
-    return data.giftCardsRLD;
+
+    return data.ecommerce; // Ecommerce or giftCardsRLD
   }
 );
 
@@ -33,17 +34,14 @@ export const productSlice = createSlice({
   initialState,
   name: 'products',
   reducers: {
-    selectProduct: (state, action: PayloadAction<GiftCard>) => {
+    selectProduct: (state, action: PayloadAction<Ecommerce>) => {
       state.selectedProduct = action.payload;
     },
     clearSelectedProduct: (state) => {
       state.selectedProduct = undefined;
     },
-    filterAndSetSelectedProduct: (state, action: PayloadAction<number>) => {
-      state.selectedProduct = getProductById(
-        state.value!.content,
-        action.payload
-      );
+    filterAndSetSelectedProduct: (state, action: PayloadAction<string>) => {
+      state.selectedProduct = getProductById(state.value!, action.payload);
     },
   },
   extraReducers: (builder) => {

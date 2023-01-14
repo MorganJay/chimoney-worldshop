@@ -3,65 +3,51 @@ import styled, { css } from 'styled-components';
 import ProductRating from '../product-preview/ProductRating';
 
 import QuantityInput from './QuantityInput';
-import AmountPicker, { AmountPickerProps } from './AmountPicker';
 import { QuantityInputProps } from './QuantityInput';
 import { ProductPreviewProps } from '../../types/productCard';
 
-interface Props
-  extends ProductPreviewProps,
-    QuantityInputProps,
-    AmountPickerProps {}
+interface Props extends ProductPreviewProps, QuantityInputProps {}
 
 const ProductDisplay = ({
   quantity,
-  selectedAmount,
-  inputtedAmount,
-  onAmountChange,
-  onAmountListClick,
   onQuantityChange,
   product,
 }: Props) => {
   if (!product) return null;
 
-  const {
-    name,
-    description,
-    productId,
-    brand,
-    redeemInstruction,
-    fixedSenderDenominations,
-  } = product;
+  const { name, position, category, categoryUrl, productId, marketplace } =
+    product;
 
   return (
     <ProductDetailsContainer>
-      <ProductTitle>{name} eGift Card</ProductTitle>
-      by <ProductBrand>{brand.brandName}</ProductBrand>
+      <ProductTitle>{name}</ProductTitle>
+      by <ProductBrand>{marketplace}</ProductBrand>
       <ProductRating
         link={`/products/${productId}`}
-        ratings={brand.brandId}
+        ratings={position}
         detailed
       />
       <Divider />
       <ProductDescription>
-        <p>{description}</p>
-        <p>{redeemInstruction.verbose}</p>
+        <p>{category}</p>
+        <p>{categoryUrl}</p>
       </ProductDescription>
       <Divider />
-      <h2>Enter your gift card details</h2>
+      {/* <h2>Enter your gift card details</h2>
       <br />
       <h4>
         This Gift Card can only be used to purchase eligible goods and services
         available on Worldshop.com, and cannot be used on Worldshop websites in
         other countries.
-      </h4>
+      </h4> */}
       <DetailsPicker>
-        <AmountPicker
+        {/* <AmountPicker
           denominations={fixedSenderDenominations}
           inputtedAmount={inputtedAmount}
           onAmountChange={onAmountChange}
           onAmountListClick={onAmountListClick}
           selectedAmount={selectedAmount}
-        />
+        /> */}
         <QuantityInput
           quantity={quantity}
           onQuantityChange={onQuantityChange}

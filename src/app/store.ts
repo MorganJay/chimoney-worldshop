@@ -13,7 +13,7 @@ import {
 import storage from 'redux-persist/lib/storage';
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 
-import counterReducer from '../features/counter/counterSlice';
+import cartReducer from '../features/cart/cartSlice';
 import productsReducer from '../features/products/productSlice';
 
 const persistConfig = {
@@ -24,8 +24,8 @@ const persistConfig = {
 };
 
 const reducers = combineReducers({
-  counter: counterReducer,
-  products: productsReducer
+  products: productsReducer,
+  cart: cartReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducers);

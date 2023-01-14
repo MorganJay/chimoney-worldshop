@@ -67,7 +67,7 @@ export const ImageContainer = styled.div`
         left: 0;
         right: 0;
         width: 100%;
-        max-height: 100%;
+        height: auto;
         vertical-align: top;
         border: 0;
         text-align: center;

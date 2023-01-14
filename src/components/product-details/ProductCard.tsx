@@ -6,13 +6,13 @@ interface Props {
   price?: number;
 }
 
-const ProductImage = ({ img, name, price }: Props) => {
+const ProductImage = ({ img, name }: Props) => {
   return (
     <ImageContainer>
       <ImageWrapper>
         <img src={img} alt={name} />
       </ImageWrapper>
-      <div>
+      {/* <div>
         <GreetingsContainer>
           <span>
             Hope you enjoy this Worldshop <br />
@@ -25,7 +25,7 @@ const ProductImage = ({ img, name, price }: Props) => {
             <p>{name} Gift Card</p>
           </AmountContainer>
         </PreviewContainer>
-      </div>
+      </div> */}
     </ImageContainer>
   );
 };
@@ -35,8 +35,8 @@ export default ProductImage;
 const ImageContainer = styled.div`
   width: 30%;
   min-width: 320px;
-  box-shadow: 0 4px 10px -3px #ddd;
-  border: 1px solid #ddd;
+  /* box-shadow: 0 4px 10px -3px #ddd;
+  border: 1px solid #ddd; */
   cursor: pointer;
   border-radius: 7px;
   overflow: hidden;

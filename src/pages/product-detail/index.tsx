@@ -49,22 +49,18 @@ const ProductDetailPage = () => {
   }, []);
 
   useEffect(() => {
-    if (value?.content.length) {
-      dispatch(filterAndSetSelectedProduct(Number(id)));
+    if (value?.length) {
+      dispatch(filterAndSetSelectedProduct(id!));
     }
-  }, [value?.content.length]);
+  }, [value?.length]);
 
   useEffect(() => {
-    const price =
-      selectedProduct?.minSenderDenomination ??
-      selectedProduct?.fixedSenderDenominations?.at(0) ??
-      0;
-    setSelectedAmount(price);
+    if (selectedProduct) setSelectedAmount(selectedProduct.price!);
   }, [selectedProduct]);
 
   return (
     <Container>
-      {!value?.content.length ? (
+      {!selectedProduct ? (
         <CircularProgress
           size={50}
           sx={{
@@ -79,20 +75,20 @@ const ProductDetailPage = () => {
       ) : (
         <>
           <ProductCard
-            img={selectedProduct?.img}
+            img={selectedProduct?.thumbnail}
             name={selectedProduct?.name}
             price={selectedAmount}
           />
           <ProductDisplay
-            selectedAmount={selectedAmount}
-            inputtedAmount={inputtedAmount}
             quantity={quantity}
             product={selectedProduct!}
-            onAmountListClick={handleAmountListClick}
-            onAmountChange={handleAmountInputChange}
             onQuantityChange={handleQuantityInputChange}
           />
-          <CartCTA quantity={quantity} totalPrice={totalPrice} />
+          <CartCTA
+            currency={selectedProduct!.currency!}
+            quantity={quantity}
+            totalPrice={totalPrice}
+          />
         </>
       )}
     </Container>

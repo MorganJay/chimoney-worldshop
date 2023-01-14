@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Container = styled.div`
   min-height: 1px;
   overflow: visible;
-  width: 100%;
+  width: 95%;
   margin: 2rem auto;
 `;
 

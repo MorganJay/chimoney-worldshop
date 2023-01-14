@@ -1,9 +1,9 @@
-import { GiftCard } from './../types/assets';
+import { GiftCard, Ecommerce } from '../../types/assets';
 
 export const getProductById = (
-  products: GiftCard[],
-  id: number
-): GiftCard | undefined => {
+  products: Ecommerce[],
+  id: string
+): Ecommerce | undefined => {
   for (let i = 0; i < products.length; i++) {
     if (products[i].productId === id) {
       return products[i];

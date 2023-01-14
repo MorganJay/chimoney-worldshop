@@ -33,7 +33,7 @@ const ProductListPage = () => {
   return (
     <Container>
       <ListContainer>
-        {status !== LoadingState.IDLE ? (
+        {status !== LoadingState.IDLE && !value ? (
           <CircularProgress
             size={50}
             sx={{
@@ -50,14 +50,14 @@ const ProductListPage = () => {
             <CountContainer>
               <CountSubContainer>
                 <TextWrapper>
-                  1 - 12 of over 100 results for
+                  1 - 12 of over {value!.length - 50} results for
                   <ProductTitle> Gift Cards</ProductTitle>
                 </TextWrapper>
               </CountSubContainer>
             </CountContainer>
             <ProductsGrid>
-              {value?.content.slice(0, 12).map((giftCard) => (
-                <ProductPreview key={giftCard.productId} product={giftCard} />
+              {value?.slice(0, 12).map((product) => (
+                <ProductPreview key={product.productId} product={product} />
               ))}
             </ProductsGrid>
           </>

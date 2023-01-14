@@ -1,24 +1,27 @@
 import styled from 'styled-components';
+import { CurrencyEnum } from '../../types/assets';
+import { breakpointMd } from '../../variables.styles';
 
 import Button from '../button/Button';
 
 interface Props {
   quantity: number;
+  currency: CurrencyEnum;
   totalPrice: number;
 }
 
-const CartCTA = ({ quantity, totalPrice }: Props) => {
+const CartCTA = ({ quantity, currency, totalPrice }: Props) => {
   return (
     <CartContainer>
-      <p>
-        Qty: {quantity} gift cards <br />
-        <span>${totalPrice}.00</span>
-      </p>
+      <CartInfoDisplay>
+        Qty: {currency}{quantity} <br />
+        <PriceTag>{totalPrice}</PriceTag>
+      </CartInfoDisplay>
       <Button name="Add to cart" primary>
         Add to cart
       </Button>
       <OrDivider>
-        <h5>or</h5>
+        <OrText>or</OrText>
       </OrDivider>
       <Button name="Buy now" secondary>
         Buy Now
@@ -30,8 +33,8 @@ const CartCTA = ({ quantity, totalPrice }: Props) => {
 export default CartCTA;
 
 const CartContainer = styled.div`
-  max-width: 230px;
-  width: 30%;
+  width: 100%;
+  max-width: 402px;
   max-height: 173px;
   border-radius: 8px;
   position: relative;
@@ -41,15 +44,21 @@ const CartContainer = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  p {
-    text-align: center;
-    margin-bottom: 16px;
-  }
 
-  span {
-    font-weight: 700;
-    color: #b12704;
+  @media (min-width: ${breakpointMd}px) {
+    max-width: 230px;
+    width: 30%;
   }
+`;
+
+const PriceTag = styled.span`
+  font-weight: 700;
+  color: #b12704;
+`;
+
+const CartInfoDisplay = styled.p`
+  text-align: center;
+  margin-bottom: 16px;
 `;
 
 const OrDivider = styled.div`
@@ -61,17 +70,7 @@ const OrDivider = styled.div`
   margin-bottom: 8px;
   margin-top: 4px;
   width: 100%;
-  h5 {
-    background-color: #fff;
-    color: #767676;
-    display: inline-block;
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 1;
-    padding: 0 8px 0 7px;
-    position: relative;
-    z-index: 2;
-  }
+
   &::after {
     background-color: transparent;
     border-top: 1px solid #e7e7e7;
@@ -84,4 +83,16 @@ const OrDivider = styled.div`
     z-index: 1;
     width: 100%;
   }
+`;
+
+const OrText = styled.h5`
+  background-color: #fff;
+  color: #767676;
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1;
+  padding: 0 8px 0 7px;
+  position: relative;
+  z-index: 2;
 `;

@@ -1,4 +1,4 @@
-import { GiftCard } from './assets';
+import { Ecommerce } from './assets';
 
 export interface ProductCardProps {
   link: string;
@@ -6,5 +6,5 @@ export interface ProductCardProps {
 }
 
 export interface ProductPreviewProps {
-  product: GiftCard;
+  product: Ecommerce;
 }

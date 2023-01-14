@@ -6,5 +6,7 @@ import { AssetsResponse } from '../types/assets';
 export const getAssetsAsync = async (): Promise<
   AxiosResponse<AssetsResponse>
 > => {
-  return await http.get<any, AxiosResponse<AssetsResponse>, any>('info/assets');
+  return await http.get<any, AxiosResponse<AssetsResponse>, any>(
+    'info/assets?countryCode=NG'
+  );
 };
