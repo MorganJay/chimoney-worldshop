@@ -2,18 +2,29 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 import { ProductCardProps, ProductPreviewProps } from '../../types/productCard';
+import { CurrencyEnum } from '../../types/assets';
 
-interface Props extends ProductCardProps, ProductPreviewProps {}
+interface Props extends ProductCardProps {
+  price: number | null;
+  currency: CurrencyEnum | null;
+  checkout?: boolean;
+}
 
-const ProductPrice = ({ product, link, handleClick }: Props) => {
-  const { price, currency } = product;
+const ProductPrice = ({
+  price = 0,
+  currency,
+  link = '',
+  handleClick,
+  checkout,
+}: Props) => {
+  const displayPrice = price!.toLocaleString().split('.');
   // const fixedPrice = fixedSenderDenominations?.at(0) ?? 0;
   return (
-    <PriceContainer>
+    <PriceContainer style={{ marginTop: checkout ? 0 : 10 }}>
       <PriceSubContainer to={link} role="button" onClick={handleClick}>
         <span className="symbol">{currency}</span>
-        {price?.toString().split('.')[0] ?? 0}
-        <span className="fraction">{price?.toString().split('.')[1] ?? 0}</span>
+        {displayPrice[0] ?? 0}
+        <span className="fraction">{displayPrice[1] ?? '00'}</span>
         {/* {denominationType === DenominationType.Range && (
           <>
             <span className="dash">-</span>
@@ -30,7 +41,6 @@ const ProductPrice = ({ product, link, handleClick }: Props) => {
 export default ProductPrice;
 
 export const PriceContainer = styled.div`
-  margin-top: 10px;
   width: 100%;
 `;
 
@@ -38,6 +48,7 @@ export const PriceSubContainer = styled(Link)`
   display: block;
   user-select: none;
   font-size: 28px;
+  font-weight: 600;
 
   .symbol,
   .fraction {

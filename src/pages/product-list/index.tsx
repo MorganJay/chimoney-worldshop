@@ -51,7 +51,7 @@ const ProductListPage = () => {
               <CountSubContainer>
                 <TextWrapper>
                   1 - 12 of over {value!.length - 50} results for
-                  <ProductTitle> Gift Cards</ProductTitle>
+                  <ProductTitle> Our Products</ProductTitle>
                 </TextWrapper>
               </CountSubContainer>
             </CountContainer>

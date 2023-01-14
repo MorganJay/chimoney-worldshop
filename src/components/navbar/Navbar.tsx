@@ -9,7 +9,7 @@ const NavBar = () => {
     <StyledNav>
       <TitleContainer>
         <Link to="/">
-          <Title>Wordshop Products</Title>
+          <Title>Worldshop Products</Title>
         </Link>
         <NavCartWrapper>
           <h1>Welcome, Alice!</h1>

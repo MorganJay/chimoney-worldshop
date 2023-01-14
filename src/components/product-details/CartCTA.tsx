@@ -19,6 +19,7 @@ interface Props {
 
 const CartCTA = ({ productId, quantity, currency, totalPrice }: Props) => {
   const dispatch = useAppDispatch();
+  const itemsDisplay = quantity > 1 ? 'items' : 'item';
 
   const handleAddItem = () => {
     const cartItem: CartItem = {
@@ -26,13 +27,13 @@ const CartCTA = ({ productId, quantity, currency, totalPrice }: Props) => {
       quantity,
     };
     dispatch(addItem(cartItem));
-    toast.success(`${quantity} item(s) added to your cart`);
+    toast.success(`${quantity} ${itemsDisplay} added to your cart`);
   };
 
   return (
     <CartContainer>
       <CartInfoDisplay>
-        Qty: {quantity} item(s) <br />
+        Qty: {quantity} {itemsDisplay} <br />
         <PriceTag>
           {currency}
           {totalPrice}

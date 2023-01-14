@@ -66,7 +66,6 @@ const StyledButton = styled.button<CustomButtonProps>`
   text-align: center;
   border-style: solid;
   border-width: 1px;
-  padding: 0;
   text-decoration: none;
   &:active {
     border-color: #008296;

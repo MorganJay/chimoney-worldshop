@@ -13,7 +13,7 @@ import { ProductPreviewProps } from '../../types/productCard';
 
 const ProductPreview = ({ product }: ProductPreviewProps) => {
   const dispatch = useAppDispatch();
-  const { name, thumbnail, productId, marketplace, position } = product;
+  const { name, thumbnail, productId, currency, price, position } = product;
   const link = `/products/${productId}`;
 
   return (
@@ -39,7 +39,8 @@ const ProductPreview = ({ product }: ProductPreviewProps) => {
               handleClick={() => dispatch(selectProduct(product))}
             />
             <Price
-              product={product}
+              price={price}
+              currency={currency}
               link={link}
               handleClick={() => dispatch(selectProduct(product))}
             />

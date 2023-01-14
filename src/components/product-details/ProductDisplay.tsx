@@ -86,7 +86,7 @@ const ProductBrand = styled.span`
   color: #007185;
 `;
 
-const Divider = styled.hr`
+export const Divider = styled.hr`
   margin-bottom: 16px;
   background-color: transparent;
   border-bottom-width: 0;

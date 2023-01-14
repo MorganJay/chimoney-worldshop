@@ -1,7 +1,7 @@
 import { Ecommerce } from './assets';
 
 export interface ProductCardProps {
-  link: string;
+  link?: string;
   handleClick?: () => void;
 }
 
