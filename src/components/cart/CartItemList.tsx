@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom';
 
 import CartItem from '../cart-item/CartItem';
 import { Divider } from '../product-details/ProductDisplay';
-import { breakpointMd, borderColor, linkColor } from '../../variables.styles';
+import { borderColor, linkColor, breakpointLg } from '../../variables.styles';
 
 const CartItemList = () => {
   return (
     <ItemsContainer>
-      {window.innerWidth < breakpointMd ? (
+      {window.innerWidth < breakpointLg ? (
         <Divider />
       ) : (
         <ListHeader>Price</ListHeader>

@@ -1,10 +1,12 @@
-import CheckoutButton from '../../components/cart/CheckoutButton';
-import GiftPrompt from '../../components/cart/GiftPrompt';
 import Subtotal from '../../components/cart/Subtotal';
-import CartItemList from '../../components/cart/CartItemList';
+import GiftPrompt from '../../components/cart/GiftPrompt';
 import PageHeader from '../../components/cart/PageHeader';
-import RelatedProducts from '../../components/cart/RelatedProducts';
+import CartItemList from '../../components/cart/CartItemList';
+import CheckoutButton from '../../components/cart/CheckoutButton';
+
 import { breakpointMd } from '../../variables.styles';
+
+import useWindowDimensions from '../../hooks/useWindowDimensions';
 
 import {
   CheckoutContainer,
@@ -16,22 +18,23 @@ import {
 } from './styles';
 
 const CartPage = () => {
+  const { width } = useWindowDimensions();
   return (
     <Container>
       <SubContainer>
         <CheckoutContainer>
           <CheckoutWrapper>
             <Subtotal />
-            {window.innerWidth >= breakpointMd && (
+            {width >= breakpointMd && (
               <GiftPrompt label="This order contains a gift" />
             )}
             <CheckoutButton />
             <CheckoutDivider />
-            {window.innerWidth < breakpointMd && (
+            {width < breakpointMd && (
               <GiftPrompt label="Send as a gift. Include custom message" />
             )}
           </CheckoutWrapper>
-          <RelatedProducts />
+          {/* <RelatedProducts /> */}
         </CheckoutContainer>
         <PageWrapper>
           <PageHeader />

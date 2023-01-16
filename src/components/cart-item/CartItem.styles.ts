@@ -57,9 +57,6 @@ export const DetailsContainer = styled.div`
     margin-bottom: 0.5rem;
   }
 
-  a {
-    color: #007185;
-  }
   .stock {
     color: #007185;
     margin-top: 0.5rem;
@@ -67,6 +64,9 @@ export const DetailsContainer = styled.div`
 
   .vendor {
     width: 95%;
+    a {
+      color: #007185;
+    }
   }
 
   @media (min-width: ${breakpointMd}px) {
@@ -131,10 +131,6 @@ export const CartControls = styled.div`
   width: 95%;
   justify-content: space-between;
   margin-top: 0.4rem;
-
-  @media (min-width: ${breakpointMd}px) {
-    display: none;
-  }
 `;
 
 export const ControlBtn = styled.button`

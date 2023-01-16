@@ -1,24 +1,23 @@
 import styled from 'styled-components';
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import AddIcon from '@mui/icons-material/Add';
+
+import Select from './ItemQuantitySelect';
+import Buttons from './ItemQuantityButtons';
+import { Separator } from '../cart/CartControls';
+
+import { breakpointMd } from '../../variables.styles';
 
 const ItemQuantityToggle = () => {
   return (
     <Container>
-      <button title="decrease quantity">
-        <DeleteOutlineIcon />
-      </button>
-      <span>1</span>
-      <button title="add quantity">
-        <AddIcon />
-      </button>
+      {window.innerWidth < breakpointMd ? <Buttons /> : <Select />}
+      <Separator />
     </Container>
   );
 };
 
 export default ItemQuantityToggle;
 
-export const Container = styled.div`
+const Container = styled.div`
   display: flex;
   width: 40%;
   border-radius: 10px;
@@ -37,20 +36,12 @@ export const Container = styled.div`
     padding: 0.5em 0;
   }
 
-  span {
-    width: 35%;
-    background-color: white;
-    color: #007185;
-  }
-
-  button {
-    background-color: #f0f2f2;
+  @media (min-width: ${breakpointMd}px) {
     border: none;
-    width: 33%;
-
-    &:active {
-      border-color: #008296;
-      box-shadow: 0 0 0 3px #c8f3fa, inset 0 0 0 2px #fff;
-    }
+    background-color: unset;
+    box-shadow: none;
+    width: unset;
+    align-items: center;
+    justify-content: flex-start;
   }
 `;

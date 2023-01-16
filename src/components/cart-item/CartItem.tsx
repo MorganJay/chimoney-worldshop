@@ -1,9 +1,10 @@
 import PrimeLogo from '../cart/PrimeLogo';
 import GiftPrompt from '../cart/GiftPrompt';
+import CartControls from '../cart/CartControls';
 import ProductPrice from '../product-preview/ProductPrice';
-import ItemQuantityToggle from '../item-quantity/ItemQuantityToggle';
 
 import { CurrencyEnum } from '../../types/assets';
+import { breakpointMd } from '../../variables.styles';
 
 import {
   Container,
@@ -13,8 +14,6 @@ import {
   SelectContainer,
   DetailsContainer,
   PriceLogoContainer,
-  CartControls,
-  ControlBtn,
 } from './CartItem.styles';
 
 const CartItem = () => {
@@ -49,20 +48,21 @@ const CartItem = () => {
           <p className="vendor">
             Sold by <a href="">REMO TECH US</a> and Fufilled By Amazon.ca.
           </p>
-          <PrimeLogo style={{ marginBottom: 5 }} />
-          <GiftPrompt>
-            <span style={{ fontSize: 12 }}>This will be a gift</span>{' '}
-            <a href="" style={{ fontSize: 12 }}>
-              Learn more
-            </a>
-          </GiftPrompt>
+          {window.innerWidth > breakpointMd && (
+            <>
+              <PrimeLogo style={{ marginBottom: 5 }} />
+              <GiftPrompt>
+                <span style={{ fontSize: 12 }}>This will be a gift</span>{' '}
+                <a href="" style={{ fontSize: 12 }}>
+                  Learn more
+                </a>
+              </GiftPrompt>
+              <CartControls />
+            </>
+          )}
         </DetailsContainer>
       </ItemContainer>
-      <CartControls>
-        <ItemQuantityToggle />
-        <ControlBtn>Delete</ControlBtn>
-        <ControlBtn>Save for later</ControlBtn>
-      </CartControls>
+      {window.innerWidth < breakpointMd && <CartControls mobile />}
     </Container>
   );
 };
