@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 
-import Button from '../../components/button/Button';
 import { Divider } from '../../components/product-details/ProductDisplay';
 
 import { breakpointMd } from '../../variables.styles';
@@ -13,6 +12,8 @@ export const Container = styled.div`
   margin-top: -15px;
   @media (min-width: ${breakpointMd}px) {
     background-color: #eaeded;
+    padding-top: 14px;
+    min-width: 998px;
   }
 `;
 
@@ -23,39 +24,40 @@ export const SubContainer = styled.div`
   flex-flow: column wrap;
   justify-content: center;
   align-items: center;
-  /* width: 100%; */
   margin: 0 auto;
-
-  .page-title-container,
-  .subtotal-items-count {
-    display: none;
-  }
+  width: 100%;
 
   @media (min-width: ${breakpointMd}px) {
-    .page-title-container,
-    .subtotal-items-count {
-      display: initial;
-    }
+    padding: 0;
+    align-items: stretch;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    gap: 1rem;
   }
 `;
 
 export const CheckoutContainer = styled.div`
   width: 90%;
-`;
-
-export const SubtotalContainer = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 0.5rem;
-  h2 {
-    font-weight: 500;
-    font-size: 18px;
+  @media (min-width: ${breakpointMd}px) {
+    order: 2;
+    width: 40%;
+    max-width: 300px;
+    max-height: 739px;
   }
 `;
 
-export const CheckoutBtn = styled(Button)`
-  border-radius: 7px;
+export const CheckoutWrapper = styled.div`
+  @media (min-width: ${breakpointMd}px) {
+    margin-bottom: 20px;
+    background-color: #fff;
+    overflow: auto;
+    padding: 20px;
+
+    hr {
+      display: none;
+    }
+  }
 `;
 
 export const CheckoutDivider = styled(Divider)`
@@ -65,27 +67,17 @@ export const CheckoutDivider = styled(Divider)`
   margin-bottom: 1rem;
 `;
 
-export const GiftPromptContainer = styled.div`
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-
-  input {
-    cursor: pointer;
-    width: 20px;
-    height: 20px;
-  }
-`;
-
-export const Header = styled.div``;
-
-export const ItemsContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+export const PageWrapper = styled.div`
   height: 100%;
-  gap: 0.7rem;
-  hr {
-    margin: 1.2rem 0 0;
+  @media (min-width: ${breakpointMd}px) {
+    order: 1;
+    width: 100%;
+    display: block;
+    background-color: white;
+    max-width: 1138px;
+    margin-bottom: 20px;
+    background-color: #fff;
+    overflow: auto;
+    padding: 20px 20px 15px;
   }
 `;

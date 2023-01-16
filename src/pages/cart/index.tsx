@@ -1,19 +1,18 @@
-import CartItem from '../../components/cart-item/CartItem';
-import { Divider } from '../../components/product-details/ProductDisplay';
-import ProductPrice from '../../components/product-preview/ProductPrice';
-
-import { CurrencyEnum } from '../../types/assets';
+import CheckoutButton from '../../components/cart/CheckoutButton';
+import GiftPrompt from '../../components/cart/GiftPrompt';
+import Subtotal from '../../components/cart/Subtotal';
+import CartItemList from '../../components/cart/CartItemList';
+import PageHeader from '../../components/cart/PageHeader';
+import RelatedProducts from '../../components/cart/RelatedProducts';
+import { breakpointMd } from '../../variables.styles';
 
 import {
-  CheckoutBtn,
   CheckoutContainer,
   CheckoutDivider,
-  Container,
-  GiftPromptContainer,
-  Header,
-  ItemsContainer,
   SubContainer,
-  SubtotalContainer,
+  PageWrapper,
+  Container,
+  CheckoutWrapper,
 } from './styles';
 
 const CartPage = () => {
@@ -21,34 +20,23 @@ const CartPage = () => {
     <Container>
       <SubContainer>
         <CheckoutContainer>
-          <SubtotalContainer>
-            <h2 className="subtotal-label">Subtotal</h2>
-            <span className="subtotal-items-count">(4 items):</span>
-            <ProductPrice
-              price={3403.29}
-              currency={CurrencyEnum.Empty}
-              checkout
-            />
-          </SubtotalContainer>
-          <CheckoutBtn name="Checkout" primary>
-            Proceed to checkout <span className="items-count">(4 items)</span>
-          </CheckoutBtn>
-          <CheckoutDivider />
-          <GiftPromptContainer>
-            <input type="checkbox" name="gift-option" id="gift-option" />
-            Send as a gift. Include custom message
-          </GiftPromptContainer>
+          <CheckoutWrapper>
+            <Subtotal />
+            {window.innerWidth >= breakpointMd && (
+              <GiftPrompt label="This order contains a gift" />
+            )}
+            <CheckoutButton />
+            <CheckoutDivider />
+            {window.innerWidth < breakpointMd && (
+              <GiftPrompt label="Send as a gift. Include custom message" />
+            )}
+          </CheckoutWrapper>
+          <RelatedProducts />
         </CheckoutContainer>
-        <Header className="page-title-container">
-          <h1>Shopping Cart</h1>
-          <p>Select all items</p>
-        </Header>
-        <ItemsContainer>
-          <Divider />
-          <CartItem />
-          <CartItem />
-          <CartItem />
-        </ItemsContainer>
+        <PageWrapper>
+          <PageHeader />
+          <CartItemList />
+        </PageWrapper>
       </SubContainer>
     </Container>
   );

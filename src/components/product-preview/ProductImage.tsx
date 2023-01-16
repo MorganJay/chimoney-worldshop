@@ -17,7 +17,7 @@ const ProductImage = ({
   return (
     <ImageContainer onClick={handleClick}>
       <span>
-        <Link to={link} onClick={handleClick}>
+        <Link to={link!} onClick={handleClick}>
           <div>
             <img src={imgUrl} alt={name} />
           </div>
@@ -67,7 +67,6 @@ export const ImageContainer = styled.div`
         left: 0;
         right: 0;
         width: 100%;
-        height: auto;
         vertical-align: top;
         border: 0;
         text-align: center;

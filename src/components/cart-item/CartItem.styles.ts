@@ -1,11 +1,19 @@
 import styled from 'styled-components';
 
+import { breakpointMd, linkColor } from '../../variables.styles';
+
 export const Container = styled.div`
   background: #f8f8f8;
-
   padding: 10px 9px;
   border-radius: 5px;
   padding-left: 10px;
+
+  @media (min-width: ${breakpointMd}px) {
+    background-color: white;
+    border-bottom: 1px solid #e7e7e7;
+    position: relative;
+    margin-top: 12px;
+  }
 `;
 
 export const ItemContainer = styled.div`
@@ -13,12 +21,33 @@ export const ItemContainer = styled.div`
   display: flex;
   justify-content: space-between;
   gap: 1rem;
+  @media (min-width: ${breakpointMd}px) {
+    gap: 12px;
+    justify-content: flex-start;
+  }
+`;
+
+export const SelectContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin-right: 8px;
+  margin-bottom: 8px;
+  input {
+    height: 16px;
+    width: 16px;
+    padding-left: 19px;
+  }
 `;
 
 export const Image = styled.img`
   max-height: 170px;
   height: auto;
   mix-blend-mode: multiply;
+  @media (min-width: ${breakpointMd}px) {
+    max-width: 180px;
+    max-height: 180px;
+    margin-bottom: 4px;
+  }
 `;
 
 export const DetailsContainer = styled.div`
@@ -28,10 +57,9 @@ export const DetailsContainer = styled.div`
     margin-bottom: 0.5rem;
   }
 
-  .name {
-    text-overflow: ellipsis;
+  a {
+    color: #007185;
   }
-
   .stock {
     color: #007185;
     margin-top: 0.5rem;
@@ -39,9 +67,46 @@ export const DetailsContainer = styled.div`
 
   .vendor {
     width: 95%;
+  }
 
-    a {
-      color: #007185;
+  @media (min-width: ${breakpointMd}px) {
+    flex-shrink: 1;
+    flex-grow: 1;
+    .name {
+      margin-bottom: 12px;
+    }
+    .stock {
+      color: #007600;
+      margin: 0;
+      font-size: 12px;
+    }
+    .vendor {
+      font-size: 12px;
+      margin-bottom: 5px;
+    }
+  }
+`;
+
+export const NameContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  word-wrap: break-word;
+  p {
+    text-overflow: ellipsis;
+    white-space: normal;
+    overflow: hidden;
+    max-width: 600px;
+  }
+  span {
+    display: none;
+  }
+
+  @media (min-width: ${breakpointMd}px) {
+    span {
+      display: block;
+      font-weight: 700;
+      font-size: 18px;
     }
   }
 `;
@@ -54,6 +119,10 @@ export const PriceLogoContainer = styled.div`
   div {
     width: auto;
   }
+
+  @media (min-width: ${breakpointMd}px) {
+    display: none;
+  }
 `;
 
 export const CartControls = styled.div`
@@ -62,6 +131,10 @@ export const CartControls = styled.div`
   width: 95%;
   justify-content: space-between;
   margin-top: 0.4rem;
+
+  @media (min-width: ${breakpointMd}px) {
+    display: none;
+  }
 `;
 
 export const ControlBtn = styled.button`
