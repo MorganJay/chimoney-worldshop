@@ -53,10 +53,14 @@ const ControlBtn = styled.button`
   box-shadow: 0 2px 5px 0 rgb(213 217 217 / 50%);
   padding: 0 10px 0 11px;
   -webkit-tap-highlight-color: transparent;
-
+    
   &:active {
     border-color: #008296;
     box-shadow: 0 0 0 3px #c8f3fa, inset 0 0 0 2px #fff;
+  }
+
+  &:hover {
+    background: #e3e6e6;
   }
 
   @media (min-width: ${breakpointMd}px) {

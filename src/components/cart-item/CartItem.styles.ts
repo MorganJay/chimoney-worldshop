@@ -28,7 +28,7 @@ export const ItemContainer = styled.div`
 `;
 
 export const SelectContainer = styled.div`
-  display: flex;
+  display: none;
   align-items: center;
   margin-right: 8px;
   margin-bottom: 8px;
@@ -36,6 +36,9 @@ export const SelectContainer = styled.div`
     height: 16px;
     width: 16px;
     padding-left: 19px;
+  }
+  @media (min-width: ${breakpointMd}px) {
+    display: flex;
   }
 `;
 

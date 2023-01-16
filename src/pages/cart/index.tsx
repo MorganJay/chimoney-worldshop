@@ -1,11 +1,17 @@
+import { useEffect, useState } from 'react';
+
 import Subtotal from '../../components/cart/Subtotal';
 import GiftPrompt from '../../components/cart/GiftPrompt';
 import PageHeader from '../../components/cart/PageHeader';
 import CartItemList from '../../components/cart/CartItemList';
 import CheckoutButton from '../../components/cart/CheckoutButton';
+import SavedItemPrompt from '../../components/cart/SavedItemPrompt';
 
+import { Ecommerce } from '../../types/assets';
 import { breakpointMd } from '../../variables.styles';
 
+import { selectStore } from '../../app/store';
+import { useAppSelector } from '../../app/hooks';
 import useWindowDimensions from '../../hooks/useWindowDimensions';
 
 import {
@@ -19,7 +25,24 @@ import {
 
 const CartPage = () => {
   const { width } = useWindowDimensions();
-  return (
+  const { cart, products } = useAppSelector(selectStore);
+  const [items, setItems] = useState<Ecommerce[]>([]);
+
+  useEffect(() => {
+    if (products.value?.length && cart.cartItems.length) {
+      let cartItems: Ecommerce[] = [];
+      cart.cartItems.forEach((item) => {
+        const cartItem = products.value!.find(({ productId }) => productId === item.id);
+        cartItems.push(cartItem!);
+      });
+      setItems(cartItems);
+    }
+    console.log('Products not loaded');
+  }, []);
+
+  useEffect(() => console.log(items), [items]);
+
+  return (  
     <Container>
       <SubContainer>
         <CheckoutContainer>
@@ -38,6 +61,7 @@ const CartPage = () => {
         </CheckoutContainer>
         <PageWrapper>
           <PageHeader />
+          <SavedItemPrompt />
           <CartItemList />
         </PageWrapper>
       </SubContainer>

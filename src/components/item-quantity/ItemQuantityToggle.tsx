@@ -20,6 +20,7 @@ export default ItemQuantityToggle;
 const Container = styled.div`
   display: flex;
   width: 40%;
+  max-width: 120px;
   border-radius: 10px;
   border: 1px solid #ddd;
   overflow: hidden;
