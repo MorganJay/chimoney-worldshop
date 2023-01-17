@@ -24,16 +24,7 @@ export interface CartItemProps {
 }
 
 const CartItem = ({ item, onDelete, onSave }: CartItemProps) => {
-  const {
-    productId,
-    currency,
-    marketplace,
-    name,
-    price,
-    quantity,
-    thumbnail,
-    url,
-  } = item;
+  const { currency, marketplace, name, price, thumbnail, url } = item;
 
   return (
     <Container>

@@ -14,12 +14,16 @@ import { selectStore } from '../../app/store';
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import useWindowDimensions from '../../hooks/useWindowDimensions';
 
-import { CartItem, EcommerceCartItem } from '../../types/cart';
-import {
-  fetchCartItemsData,
-  getCartTotalPrice,
-} from '../../features/cart/cartFunctions';
+import { EcommerceCartItem } from '../../types/cart';
+import { clearSelectedItem } from '../../features/cart/cartSlice';
+import { fetchCartItemsData } from '../../features/cart/cartFunctions';
 import { fetchAssetsAsync } from '../../features/products/productSlice';
+
+import cartPageReducer, {
+  CartPageActions,
+  initialState,
+  ItemActionPrompt,
+} from '../../redux/cartPageReducer';
 
 import {
   CheckoutContainer,
@@ -30,13 +34,6 @@ import {
   PageFooter,
   CheckoutWrapper,
 } from './styles';
-
-import cartPageReducer, {
-  CartPageActions,
-  initialState,
-  ItemActionPrompt,
-} from '../../redux/cartPageReducer';
-import { clearSelectedItem } from '../../features/cart/cartSlice';
 
 const CartPage = () => {
   const appDispatch = useAppDispatch();
