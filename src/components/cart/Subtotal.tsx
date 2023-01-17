@@ -3,14 +3,24 @@ import styled from 'styled-components';
 import ProductPrice from '../product-preview/ProductPrice';
 import { CurrencyEnum } from '../../types/assets';
 import { breakpointMd } from '../../variables.styles';
+import { useAppSelector } from '../../app/hooks';
+import { selectCartItemsCount } from '../../features/cart/cartSlice';
 
-const Subtotal = () => {
+interface Props {
+  totalPrice: number;
+}
+
+const Subtotal = ({ totalPrice }: Props) => {
+  const count = useAppSelector(selectCartItemsCount);
+
   return (
     <SubtotalContainer>
       <h2 className="subtotal-label">Subtotal</h2>
-      <span className="subtotal-items-count">(4 items):</span>
-      <span className="price">$44.95</span>
-      <ProductPrice price={3403.29} currency={CurrencyEnum.Empty} checkout />
+      <span className="subtotal-items-count">
+        ({count === 1 ? count + ' item' : count + ' items'}):
+      </span>
+      <span className="price">${totalPrice}</span>
+      <ProductPrice price={totalPrice} currency={CurrencyEnum.Empty} checkout />
     </SubtotalContainer>
   );
 };

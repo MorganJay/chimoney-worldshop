@@ -1,11 +1,9 @@
 import styled from 'styled-components';
-import { breakpointMd, linkColor } from '../../variables.styles';
 
+import { CartItemProps } from '../cart-item/CartItem';
 import ItemQuantityToggle from '../item-quantity/ItemQuantityToggle';
 
-interface Props {
-  mobile?: boolean;
-}
+import { breakpointMd, linkColor } from '../../variables.styles';
 
 export const Separator = () => (
   <StyledSeparator
@@ -15,15 +13,21 @@ export const Separator = () => (
   />
 );
 
-const CartControls = ({ mobile }: Props) => {
+const CartControls = ({ mobile, item, onDelete, onSave }: CartItemProps) => {
   return (
     <CartControlsContainer className={mobile ? 'mobile' : ''}>
-      <ItemQuantityToggle />
-      <ControlBtn type="button">Delete</ControlBtn>
+      <ItemQuantityToggle item={item} onDelete={onDelete} />
+      <ControlBtn type="button" onClick={() => onDelete(item)}>
+        Delete
+      </ControlBtn>
       <Separator />
-      <ControlBtn type="button">Save for later</ControlBtn>
+      <ControlBtn type="button" onClick={() => onSave?.(item)}>
+        Save for later
+      </ControlBtn>
       <Separator />
-      <ControlBtn type="button">See more like this</ControlBtn>
+      {window.innerWidth >= breakpointMd && (
+        <ControlBtn type="button">See more like this</ControlBtn>
+      )}
     </CartControlsContainer>
   );
 };
@@ -53,7 +57,7 @@ const ControlBtn = styled.button`
   box-shadow: 0 2px 5px 0 rgb(213 217 217 / 50%);
   padding: 0 10px 0 11px;
   -webkit-tap-highlight-color: transparent;
-    
+
   &:active {
     border-color: #008296;
     box-shadow: 0 0 0 3px #c8f3fa, inset 0 0 0 2px #fff;
@@ -73,6 +77,12 @@ const ControlBtn = styled.button`
 
     &:hover {
       text-decoration: underline;
+      background: unset;
+    }
+
+    &:active {
+      border: none;
+      box-shadow: none;
     }
   }
 `;

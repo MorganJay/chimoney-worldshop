@@ -17,7 +17,7 @@ const ProductPrice = ({
   handleClick,
   checkout,
 }: Props) => {
-  const displayPrice = price!.toLocaleString().split('.');
+  const displayPrice = price!.toLocaleString('en-US').split('.');
   // const fixedPrice = fixedSenderDenominations?.at(0) ?? 0;
   return (
     <PriceContainer style={{ marginTop: checkout ? 0 : 10 }}>

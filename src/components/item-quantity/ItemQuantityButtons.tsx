@@ -1,15 +1,34 @@
 import styled from 'styled-components';
 import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
-const ItemQuantityButtons = () => {
+import { CartItemProps } from '../cart-item/CartItem';
+
+import { useAppDispatch } from '../../app/hooks';
+
+import { removeItem, addItem } from '../../features/cart/cartSlice';
+
+const ItemQuantityButtons = ({ item, onDelete }: CartItemProps) => {
+  const dispatch = useAppDispatch();
+  const cartItem = { id: item.productId, quantity: item.quantity };
+
+  const handleDecrement = () => {
+    if (item.quantity === 1) {
+      onDelete(item);
+    } else dispatch(removeItem(cartItem));
+  };
+
   return (
     <>
-      <StyledButton title="decrease quantity">
-        <DeleteOutlineIcon />
+      <StyledButton title="decrease quantity" onClick={handleDecrement}>
+        {item.quantity === 1 ? <DeleteOutlineIcon /> : <RemoveIcon />}
       </StyledButton>
-      <StyledSpan>1</StyledSpan>
-      <StyledButton title="add quantity">
+      <StyledSpan>{item.quantity}</StyledSpan>
+      <StyledButton
+        title="add quantity"
+        onClick={() => dispatch(addItem(cartItem))}
+      >
         <AddIcon />
       </StyledButton>
     </>

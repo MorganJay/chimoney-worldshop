@@ -44,10 +44,12 @@ export const SelectContainer = styled.div`
 
 export const Image = styled.img`
   max-height: 170px;
-  height: auto;
   mix-blend-mode: multiply;
+  object-fit: cover;
+  max-width: 180px;
+  /* align-self: center; */
+
   @media (min-width: ${breakpointMd}px) {
-    max-width: 180px;
     max-height: 180px;
     margin-bottom: 4px;
   }
@@ -94,18 +96,19 @@ export const NameContainer = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  word-wrap: break-word;
   p {
     text-overflow: ellipsis;
-    white-space: normal;
     overflow: hidden;
-    max-width: 600px;
+    max-height: 65px;
   }
   span {
     display: none;
   }
 
   @media (min-width: ${breakpointMd}px) {
+    p {
+      max-width: 500px;
+    }
     span {
       display: block;
       font-weight: 700;

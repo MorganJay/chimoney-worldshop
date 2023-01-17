@@ -1,22 +1,40 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 
 import CartItem from '../cart-item/CartItem';
 import { Divider } from '../product-details/ProductDisplay';
-import { borderColor, linkColor, breakpointLg } from '../../variables.styles';
 
-const CartItemList = () => {
+import { borderColor, breakpointLg } from '../../variables.styles';
+import { EcommerceCartItem } from '../../types/cart';
+import { ItemActionPrompt } from '../../redux/cartPageReducer';
+
+interface Props {
+  items: EcommerceCartItem[];
+  itemPrompt: ItemActionPrompt | undefined;
+  handleDelete: (item: EcommerceCartItem) => void;
+  handleSave: (item: EcommerceCartItem) => void;
+}
+
+const CartItemList = ({
+  itemPrompt,
+  items,
+  handleDelete,
+  handleSave,
+}: Props) => {
   return (
     <ItemsContainer>
       {window.innerWidth < breakpointLg ? (
         <Divider />
-      ) : (
+      ) : items.length || itemPrompt ? (
         <ListHeader>Price</ListHeader>
-      )}
-
-      <CartItem />
-      <CartItem />
-      <CartItem />
+      ) : null}
+      {items.map((item) => (
+        <CartItem
+          key={item.productId}
+          item={item}
+          onDelete={handleDelete}
+          onSave={handleSave}
+        />
+      ))}
     </ItemsContainer>
   );
 };

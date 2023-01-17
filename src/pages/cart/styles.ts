@@ -6,7 +6,7 @@ import { breakpointMd } from '../../variables.styles';
 
 export const Container = styled.div`
   width: 100%;
-  height: 100%;
+  min-height: 100%;
   padding: 0 18px 18px;
   margin: 0 auto;
   margin-top: -15px;
@@ -79,5 +79,15 @@ export const PageWrapper = styled.div`
     background-color: #fff;
     overflow: auto;
     padding: 20px 20px 15px;
+  }
+`;
+
+export const PageFooter = styled.div`
+  display: none;
+  justify-content: flex-end;
+  padding: 1rem 0;
+
+  @media (min-width: ${breakpointMd}px) {
+    display: flex;
   }
 `;

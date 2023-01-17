@@ -1,11 +1,25 @@
-import { useState } from 'react';
 import styled from 'styled-components';
+import {
+  clearSelectedItem,
+  addItem,
+  setItemQuantity,
+} from '../../features/cart/cartSlice';
 
-const ItemQuantitySelect = () => {
-  const [quantity, setQuantity] = useState<number | undefined>(1);
+import { useAppDispatch } from '../../app/hooks';
+import { CartItemProps } from '../cart-item/CartItem';
+
+const ItemQuantitySelect = ({ item, onDelete }: CartItemProps) => {
+  const dispatch = useAppDispatch();
 
   const handleSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setQuantity(+event.target.value);
+    const newQuantity = event.target.value;
+
+    if (newQuantity === '0 (Delete)') {
+      onDelete(item);
+    } else {
+      const newItem = { id: item.productId, quantity: +event.target.value };
+      dispatch(setItemQuantity(newItem));
+    }
   };
 
   return (
@@ -13,15 +27,13 @@ const ItemQuantitySelect = () => {
       name="quantity"
       autoComplete="off"
       tabIndex={0}
-      value={quantity}
+      value={item.quantity}
       onChange={handleSelect}
-      //onClick={() => setQuantity(undefined)}
-      //onFocus={() => setQuantity(undefined)}
     >
       <StyledOption>0 (Delete)</StyledOption>
       {Array.from({ length: 10 }, (_, index) => index + 1).map((value, idx) => (
         <StyledOption key={idx} value={value}>
-          {value === quantity ? 'Qty: ' : ''}
+          {value === item.quantity ? 'Qty: ' : ''}
           {value}
         </StyledOption>
       ))}
@@ -50,7 +62,7 @@ const StyledSelect = styled.select`
   width: 77px;
   padding: 0;
   text-align: center;
-  text-decoration: none !important;
+  text-decoration: none;
   vertical-align: middle;
   border-style: solid;
   border-width: 1px;
@@ -68,16 +80,4 @@ const StyledSelect = styled.select`
   }
 `;
 
-const StyledOption = styled.option`
-  .label {
-    display: none;
-    opacity: 0;
-    background-color: red;
-  }
-
-  /* .selected {
-    span {
-      display: inline;
-    }
-  } */
-`;
+const StyledOption = styled.option``;

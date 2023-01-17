@@ -39,7 +39,6 @@ const GlobalStyle = createGlobalStyle`
      box-sizing: border-box;
      margin: 0;
      padding: 0;
-     /* font-family: 'Roboto', san-serif; */
      font-family: 'Amazon Ember', Arial, sans-serif;
    }
 
@@ -54,10 +53,12 @@ const GlobalStyle = createGlobalStyle`
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #0F1111;
+  height: 100vh;
 }
 
 #root{
   margin: 0 auto;
+  height: 100%;
 }
 
   a {
@@ -83,6 +84,10 @@ const GlobalStyle = createGlobalStyle`
   button {
     cursor: pointer;
     user-select: none;
+  }
+
+  .App {
+  height: 100%;
   }
 
 `;

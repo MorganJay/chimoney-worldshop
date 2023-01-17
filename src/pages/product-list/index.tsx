@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
-import CircularProgress from '@mui/material/CircularProgress';
 
 import ProductPreview from '../../components/product-preview/ProductPreview';
+import Loader from '../../components/loader/Loader';
 
 import { LoadingState } from '../../types/assets';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
@@ -34,17 +34,7 @@ const ProductListPage = () => {
     <Container>
       <ListContainer>
         {status !== LoadingState.IDLE && !value ? (
-          <CircularProgress
-            size={50}
-            sx={{
-              position: 'absolute',
-              top: 200,
-              left: 0,
-              color: '#c45500',
-              right: 0,
-              margin: 'auto',
-            }}
-          />
+          <Loader />
         ) : (
           <>
             <CountContainer>
